@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import "tailwindcss";
+
+
+body {
+   font-family: 'Montserrat', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Custom Colors */
+:root {
+   --color-primary: #c0812a;
+   /* Golden brown */
+   --color-primary-dark: #a06a1f;
+   /* Darker golden brown */
+   --color-primary-light: #d4a574;
+   /* Lighter golden brown */
+   --color-secondary: #8f887e;
+   /* Warm gray */
+   --color-secondary-dark: #6b655e;
+   /* Darker warm gray */
+   --color-secondary-light: #b5b0a8;
+   /* Lighter warm gray */
+}
+
+/* Define Tailwind color classes */
+.bg-primary {
+   background-color: var(--color-primary);
+}
+
+.bg-primary-dark {
+   background-color: var(--color-primary-dark);
+}
+
+.bg-primary-light {
+   background-color: var(--color-primary-light);
+}
+
+.bg-secondary {
+   background-color: var(--color-secondary);
+}
+
+.bg-secondary-dark {
+   background-color: var(--color-secondary-dark);
+}
+
+.bg-secondary-light {
+   background-color: var(--color-secondary-light);
+}
+
+.text-primary {
+   color: var(--color-primary);
+}
+
+.text-primary-dark {
+   color: var(--color-primary-dark);
+}
+
+.text-primary-light {
+   color: var(--color-primary-light);
+}
+
+.text-secondary {
+   color: var(--color-secondary);
+}
+
+.text-secondary-dark {
+   color: var(--color-secondary-dark);
+}
+
+.text-secondary-light {
+   color: var(--color-secondary-light);
+}
+
+.border-primary {
+   border-color: var(--color-primary);
+}
+
+.border-secondary {
+   border-color: var(--color-secondary);
+}
+
+.hover\:bg-primary:hover {
+   background-color: var(--color-primary);
+}
+
+.hover\:bg-primary-dark:hover {
+   background-color: var(--color-primary-dark);
+}
+
+.hover\:bg-secondary:hover {
+   background-color: var(--color-secondary);
+}
+
+.hover\:bg-secondary-dark:hover {
+   background-color: var(--color-secondary-dark);
+}
+
+.slick-slider {
+   height: auto !important;
+}
+
+.slick-list {
+   height: auto !important;
+}
+
+.slick-track {
+   height: auto !important;
+}
+
+.slick-slide {
+   height: auto !important;
+}
+
+.slick-slide>div {
+   height: auto !important;
+}
+
+/* Hide default arrow content */
+.slick-prev:before,
+.slick-next:before {
+   display: none !important;
+}
+
+/* Dots styling */
+.slick-dots {
+   bottom: 30px !important;
+   z-index: 20 !important;
+}
+
+.slick-dots li button:before {
+   color: white !important;
+   font-size: 10px !important;
+}
+
+.slick-dots li.slick-active button:before {
+   color: white !important;
+   font-size: 12px !important;
+}
+
+.slick-dots li {
+   width: 10px !important;
+   height: 10px !important;
+}
+
+.slick-dots li button {
+   width: 10px !important;
+   height: 10px !important;
+   padding: 0 !important;
+}
+
+/* Responsive arrow and dots for small screens */
+.slick-arrow {
+   display: flex !important;
+   align-items: center;
+   justify-content: center;
+   position: absolute;
+   top: 50% !important;
+   transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+   .custom-arrow {
+      font-size: 25px !important;
+      width: 25px !important;
+      height: 25px !important;
+   }
+
+   .slick-prev {
+      left: 15px !important;
+      z-index: 10;
+   }
+
+   .slick-next {
+      right: 15px !important;
+      z-index: 10 !important;
+   }
+
+   .slick-dots {
+      bottom: 20px !important;
+   }
+
+   .slick-dots li button:before {
+      font-size: 10px !important;
+   }
+
+   .slick-arrow.slick-disabled {
+      opacity: 0.4;
+      pointer-events: none;
+   }
+}
