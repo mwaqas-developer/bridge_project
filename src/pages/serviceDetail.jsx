@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import FsLightbox from "fslightbox-react";
+import QuoteForm from "../components/QuoteForm";
+import { Toaster } from "react-hot-toast";
 
 // Helper component for loading state
 const ServiceDetailSkeleton = () => (
@@ -112,7 +114,7 @@ const ServiceImageGallery = ({ images, onImageSelect, onImageClick, activeImage 
 );
 
 // Service Summary Component (for top section)
-const ServiceSummary = ({ service }) => (
+const ServiceSummary = ({ service, onOpenQuote }) => (
    <div className="flex flex-col h-full">
       <div className="mb-4">
          <span className="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-4 py-2 rounded-full self-start">
@@ -128,12 +130,12 @@ const ServiceSummary = ({ service }) => (
                <p className="text-sm text-gray-500">Starting from</p>
                <p className="text-4xl font-bold text-indigo-600">${service.price}</p>
             </div>
-            <Link
-               to="/contact"
+            <button
+               onClick={onOpenQuote}
                className="inline-block bg-green-500 text-white font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 transform hover:-translate-y-1"
             >
                Get a Quote
-            </Link>
+            </button>
          </div>
       </div>
    </div>
@@ -161,6 +163,7 @@ const ServiceDetail = () => {
       toggler: false,
       slide: 1,
    });
+   const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false);
 
    useEffect(() => {
       window.scrollTo(0, 0);
@@ -226,7 +229,7 @@ const ServiceDetail = () => {
 
                   {/* Content Section */}
                   <div className="flex flex-col">
-                     <ServiceSummary service={service} />
+                     <ServiceSummary service={service} onOpenQuote={() => setIsQuoteFormOpen(true)} />
                   </div>
                </div>
             </div>
@@ -243,6 +246,39 @@ const ServiceDetail = () => {
             toggler={lightboxController.toggler}
             sources={galleryImages}
             slide={lightboxController.slide}
+         />
+
+         {/* Quote Form Modal */}
+         <QuoteForm
+            isOpen={isQuoteFormOpen}
+            onClose={() => setIsQuoteFormOpen(false)}
+            serviceName={service?.name}
+         />
+
+         {/* Toast Notifications */}
+         <Toaster
+            position="top-center"
+            toastOptions={{
+               duration: 4000,
+               style: {
+                  background: '#363636',
+                  color: '#fff',
+               },
+               success: {
+                  duration: 4000,
+                  iconTheme: {
+                     primary: '#10B981',
+                     secondary: '#fff',
+                  },
+               },
+               error: {
+                  duration: 4000,
+                  iconTheme: {
+                     primary: '#EF4444',
+                     secondary: '#fff',
+                  },
+               },
+            }}
          />
       </>
    );

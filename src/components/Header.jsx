@@ -32,10 +32,10 @@ export const Header = () => {
       setIsMobileServicesOpen(!isMobileServicesOpen);
    };
    const menuitems = [
-      { name: 'About', href: '#' },
+      { name: 'About', href: '#about' },
       { name: 'Services', href: '/services', hasMegaMenu: true },
-      { name: 'Case Studies', href: '#' },
-      { name: 'Contact', href: '#' }
+      { name: 'Case Studies', href: '#cases' },
+      { name: 'Contact', href: '/contact' }
    ];
 
    const servicesData = [
@@ -114,7 +114,7 @@ export const Header = () => {
                   ))}
                </nav>
                <div className="hidden md:block">
-                  <Link to="#contact" className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-semibold">Get in touch</Link>
+                  <Link to="/contact" className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-semibold">Get in touch</Link>
                </div>
 
                {/* Mobile menu button */}
@@ -230,7 +230,7 @@ export const Header = () => {
                {/* Fixed Footer */}
                <div className="absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200">
                   <Link
-                     to="#contact"
+                     to="/contact"
                      className="block w-full px-6 py-3 bg-indigo-600 text-white text-center rounded-lg hover:bg-indigo-700 transition-colors duration-200"
                      onClick={toggleMobileMenu}
                   >

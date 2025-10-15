@@ -64,7 +64,7 @@ export const Hero = () => {
          <div className="absolute bottom-40 left-20 w-12 h-12 bg-indigo-100 rounded-full opacity-50 animate-pulse"></div>
 
          {/* Main Content */}
-         <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-12">
+         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                {/* Left Content */}
                <div className="space-y-8">
@@ -91,7 +91,7 @@ export const Hero = () => {
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                      <Link
-                        to="#services"
+                        to="/services"
                         className="group relative px-8 py-4 bg-indigo-600 text-white rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1"
                      >
                         <span>Our Services</span>
