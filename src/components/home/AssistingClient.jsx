@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const AssistingClient = () => {
    const [activeTab, setActiveTab] = useState(0);
@@ -88,101 +89,72 @@ export const AssistingClient = () => {
    ];
 
    return (
-      <section className="py-20 w-full bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <section className="py-8 sm:py-12 w-full bg-white">
          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header */}
-            <div className="text-center mb-16">
-               <div className="inline-flex items-center px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium mb-6">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                  Client Success
-               </div>
-               <h3 className="text-5xl font-bold text-gray-900 mb-6">
-                  How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Assist</span> Our Clients
-               </h3>
-               <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-                  Strategic approaches and proven methodologies to drive your business forward and achieve sustainable growth.
-               </p>
+            <div className="text-center mb-6 sm:mb-8">
+               <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">How we assist clients</h3>
+               <p className="mt-2 text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">Focused methods to help you scale, innovate, and grow.</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
                {/* Left Column - Tab Navigation */}
-               <div className="lg:col-span-4 space-y-4">
+               <div className="lg:col-span-4 space-y-2 sm:space-y-3">
                   {tabs.map((tab) => (
                      <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`group w-full p-6 rounded-3xl shadow-lg flex items-center space-x-4 transition-all duration-500 transform hover:scale-105 ${activeTab === tab.id
-                           ? `${tab.gradient} border-2 ${tab.borderColor} shadow-2xl ${tab.shadowColor} scale-105`
-                           : 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-xl'
+                        className={`group w-full p-3 sm:p-4 rounded-2xl flex items-center space-x-3 sm:space-x-4 transition-colors ${activeTab === tab.id
+                           ? 'bg-indigo-50 border border-indigo-200'
+                           : 'bg-white border border-gray-200 hover:bg-gray-50'
                            }`}
                      >
-                        <div className={`flex-shrink-0 p-4 rounded-2xl shadow-lg transition-all duration-300 ${activeTab === tab.id ? 'bg-white/90 group-hover:scale-110' : 'bg-gray-100 group-hover:bg-indigo-100'
-                           }`}>
-                           <div className={`transition-colors duration-300 ${activeTab === tab.id ? 'text-indigo-600' : 'text-gray-600 group-hover:text-indigo-600'
-                              }`}>
+                        <div className={`flex-shrink-0 p-2 sm:p-3 rounded-xl transition-colors ${activeTab === tab.id ? 'bg-white' : 'bg-gray-100 group-hover:bg-gray-200'}`}>
+                           <div className={`${activeTab === tab.id ? 'text-indigo-600' : 'text-gray-600'}`}>
                               {tab.icon}
                            </div>
                         </div>
                         <div className="flex-grow text-left">
-                           <h4 className={`font-bold text-lg transition-colors duration-300 ${activeTab === tab.id ? 'text-indigo-800' : 'text-gray-900 group-hover:text-indigo-700'
-                              }`}>
+                           <h4 className={`font-medium text-sm sm:text-base lg:text-lg ${activeTab === tab.id ? 'text-indigo-800' : 'text-gray-900'}`}>
                               {tab.title}
                            </h4>
                         </div>
-                        {activeTab === tab.id && (
-                           <div className="flex-shrink-0">
-                              <svg className="w-5 h-5 text-indigo-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                           </div>
-                        )}
+                        {activeTab === tab.id && (<div className="flex-shrink-0" />)}
                      </button>
                   ))}
                </div>
 
                {/* Right Column - Tab Content */}
                <div className="lg:col-span-8">
-                  <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100 hover:shadow-2xl transition-all duration-500">
-                     <div className="space-y-8">
-                        <div className="flex items-center mb-6">
-                           <div className="p-4 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl shadow-lg">
-                              <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-gray-100">
+                     <div className="space-y-6 sm:space-y-8">
+                        <div className="flex items-center mb-4 sm:mb-6">
+                           <div className="p-2 sm:p-3 bg-indigo-600 rounded-xl">
+                              <svg className="h-6 w-6 sm:h-8 sm:w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                               </svg>
                            </div>
-                           <h4 className="text-3xl font-bold text-gray-900 ml-4">
+                           <h4 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 ml-3 sm:ml-4">
                               {tabs[activeTab].content.title}
                            </h4>
                         </div>
 
-                        <div className="space-y-6 text-gray-600 leading-relaxed">
+                        <div className="space-y-4 sm:space-y-6 text-gray-600 leading-relaxed">
                            {tabs[activeTab].content.paragraphs.map((paragraph, index) => (
-                              <div key={index} className="group flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-all duration-300">
+                              <div key={index} className="group flex items-start gap-3 sm:gap-4 p-2 sm:p-3 rounded-xl hover:bg-gray-50 transition-colors">
                                  <div className="flex-shrink-0 mt-2">
-                                    <div className="w-3 h-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                                    <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
                                  </div>
-                                 <p className="text-lg leading-relaxed">{paragraph}</p>
+                                 <p className="text-xs sm:text-sm lg:text-base leading-relaxed text-gray-600">{paragraph}</p>
                               </div>
                            ))}
                         </div>
 
                         {/* Call to Action */}
-                        <div className="mt-8 pt-6 border-t border-gray-200">
-                           <div className="flex flex-col sm:flex-row gap-4">
-                              <button className="group bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl inline-flex items-center justify-center">
-                                 <svg className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                 </svg>
-                                 Learn More
-                              </button>
-                              <button className="group bg-white border-2 border-indigo-200 text-indigo-600 font-semibold py-4 px-8 rounded-xl hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-300 inline-flex items-center justify-center">
-                                 <svg className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                 </svg>
-                                 Get Started
-                              </button>
+                        <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
+                           <div className="flex flex-col sm:flex-row gap-3">
+                              <Link to="/services" className="bg-indigo-600 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-indigo-700 transition-colors inline-flex items-center justify-center text-sm sm:text-base">Learn more</Link>
+                              <Link to="/contact" className="bg-white border border-gray-300 text-gray-700 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center text-sm sm:text-base">Get started</Link>
                            </div>
                         </div>
                      </div>

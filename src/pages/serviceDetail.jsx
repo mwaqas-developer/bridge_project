@@ -3,11 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import FsLightbox from "fslightbox-react";
 import QuoteForm from "../components/QuoteForm";
 import { Toaster } from "react-hot-toast";
+import SectionHeading from "../components/SectionHeading";
 
 // Helper component for loading state
 const ServiceDetailSkeleton = () => (
    <div className="animate-pulse">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
          {/* Breadcrumbs */}
          <div className="mb-8 flex items-center text-sm space-x-2">
             <div className="h-4 bg-gray-200 rounded w-16"></div>
@@ -105,7 +106,7 @@ const ServiceImageGallery = ({ images, onImageSelect, onImageClick, activeImage 
                <img
                   src={image}
                   alt={`Service thumbnail ${index + 1}`}
-                  className="w-full h-24 object-cover"
+                  className="w-full h-16 sm:h-24 object-cover"
                />
             </div>
          ))}
@@ -116,23 +117,26 @@ const ServiceImageGallery = ({ images, onImageSelect, onImageClick, activeImage 
 // Service Summary Component (for top section)
 const ServiceSummary = ({ service, onOpenQuote }) => (
    <div className="flex flex-col h-full">
-      <div className="mb-4">
-         <span className="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-4 py-2 rounded-full self-start">
-            {service.category}
-         </span>
+      <div className="mb-3 sm:mb-4">
+         <Link
+            to={`/category/${encodeURIComponent(service.category.slug)}`}
+            className="inline-block bg-indigo-100 text-indigo-800 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full self-start hover:bg-indigo-200 transition-colors duration-300"
+         >
+            {service.category.name}
+         </Link>
       </div>
-      <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">{service.name}</h1>
-      <p className="text-gray-500 text-lg mb-8 leading-relaxed">A brief introduction or summary of the service can go here. For now, we are showing the start of the details.</p>
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">{service.name}</h1>
+      <p className="text-gray-500 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 leading-relaxed">A brief introduction or summary of the service can go here. For now, we are showing the start of the details.</p>
 
-      <div className="mt-auto pt-6 bg-gray-50 rounded-lg p-6 border-t border-gray-200">
-         <div className="flex items-center justify-between">
+      <div className="mt-auto pt-4 sm:pt-6 bg-gray-50 rounded-lg p-4 sm:p-6 border-t border-gray-200">
+         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-               <p className="text-sm text-gray-500">Starting from</p>
-               <p className="text-4xl font-bold text-indigo-600">${service.price}</p>
+               <p className="text-xs sm:text-sm text-gray-500">Starting from</p>
+               <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-indigo-600">${service.price}</p>
             </div>
             <button
                onClick={onOpenQuote}
-               className="inline-block bg-green-500 text-white font-semibold px-8 py-4 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 transform hover:-translate-y-1"
+               className="inline-block bg-green-500 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 transform hover:-translate-y-1 text-sm sm:text-base"
             >
                Get a Quote
             </button>
@@ -144,9 +148,9 @@ const ServiceSummary = ({ service, onOpenQuote }) => (
 // Detailed Description Component
 const ServiceDescription = ({ details }) => (
    <div>
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Full Service Description</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">Full Service Description</h2>
       <div
-         className="prose prose-lg max-w-none text-gray-600"
+         className="prose prose-sm sm:prose-lg max-w-none text-gray-600"
          dangerouslySetInnerHTML={{ __html: details }}
       />
    </div>
@@ -206,17 +210,26 @@ const ServiceDetail = () => {
    return (
       <>
          <div className="bg-white">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 sm:pb-16">
                {/* Breadcrumbs */}
-               <div className="mb-8 text-sm text-gray-500">
+               <div className="mb-6 sm:mb-8 text-xs sm:text-sm text-gray-500">
                   <Link to="/" className="hover:text-indigo-600">Home</Link>
                   <span className="mx-2">/</span>
-                  <Link to="/services" className="hover:text-indigo-600">Services</Link>
+                  <Link to="/services" className="hover:text-indigo-600">Service Categories</Link>
                   <span className="mx-2">/</span>
                   <span className="text-gray-900 font-medium">{service.name}</span>
                </div>
+               {/* Page Heading */}
+               <div className="mb-4 sm:mb-6">
+                  <SectionHeading
+                     title={service.name}
+                     subtitle={service.excerpt}
+                     align="left"
+                     size="section"
+                  />
+               </div>
 
-               <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-16">
+               <div className="grid grid-cols-1 gap-y-5 lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
                   {/* Image Section */}
                   <div>
                      <ServiceImageGallery
@@ -236,7 +249,7 @@ const ServiceDetail = () => {
          </div>
 
          {/* Detailed Description Section */}
-         <div className="bg-gray-50/70 py-16 sm:py-24">
+         <div className="bg-gray-50/70 py-12 sm:py-16 lg:py-24">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                <ServiceDescription details={service.details} />
             </div>

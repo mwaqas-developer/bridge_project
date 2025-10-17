@@ -64,35 +64,35 @@ export const Hero = () => {
          <div className="absolute bottom-40 left-20 w-12 h-12 bg-indigo-100 rounded-full opacity-50 animate-pulse"></div>
 
          {/* Main Content */}
-         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
                {/* Left Content */}
                <div className="space-y-8">
                   {/* Trust Badge */}
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 rounded-full border border-indigo-200">
+                  <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-indigo-50 rounded-full border border-indigo-200">
                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                     <span className="text-sm font-medium text-indigo-700">Trusted by 200+ Companies</span>
+                     <span className="text-xs sm:text-sm font-medium text-indigo-700">Trusted by 200+ Companiesms</span>
                   </div>
 
                   {/* Main Heading */}
-                  <div className="space-y-6">
-                     <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                  <div className="space-y-4 sm:space-y-6">
+                     <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold capitalize text-gray-900 leading-tight">
                         We craft digital experiences that{' '}
                         <span className="relative">
                            <span className="text-indigo-600">scale</span>
-                           <div className="absolute -bottom-2 left-0 w-full h-3 bg-indigo-100 -z-10"></div>
+                           <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 bg-indigo-100 -z-10"></div>
                         </span>
                      </h1>
-                     <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                     <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
                         Static, beautiful, and ready to represent your brand — a clean starting point for portfolios, agencies, and small businesses.
                      </p>
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                      <Link
                         to="/services"
-                        className="group relative px-8 py-4 bg-indigo-600 text-white rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1"
+                        className="group relative px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-indigo-600 text-white rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1 text-sm sm:text-base"
                      >
                         <span>Our Services</span>
                         <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,26 +100,26 @@ export const Hero = () => {
                         </svg>
                      </Link>
                      <Link
-                        to="#cases"
-                        className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-300 hover:border-indigo-600 hover:text-indigo-600 hover:bg-indigo-50"
+                        to="/contact"
+                        className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-300 hover:border-indigo-600 hover:text-indigo-600 hover:bg-indigo-50 text-sm sm:text-base"
                      >
-                        See case studies
+                        Contact Us
                      </Link>
                   </div>
 
                   {/* Stats Grid */}
-                  <div className="grid grid-cols-3 gap-8 pt-8">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-8 pt-6 sm:pt-8">
                      <div className="text-center">
-                        <div className="text-3xl font-bold text-indigo-600 mb-1">{years}+</div>
-                        <div className="text-sm text-gray-600 font-medium">Years combined</div>
+                        <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-indigo-600 mb-1">{years}+</div>
+                        <div className="text-xs sm:text-sm text-gray-600 font-medium">Years combined</div>
                      </div>
                      <div className="text-center">
-                        <div className="text-3xl font-bold text-indigo-600 mb-1">{projects}+</div>
-                        <div className="text-sm text-gray-600 font-medium">Projects delivered</div>
+                        <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-indigo-600 mb-1">{projects}+</div>
+                        <div className="text-xs sm:text-sm text-gray-600 font-medium">Projects delivered</div>
                      </div>
                      <div className="text-center">
-                        <div className="text-3xl font-bold text-indigo-600 mb-1">{satisfaction}%</div>
-                        <div className="text-sm text-gray-600 font-medium">Satisfaction</div>
+                        <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-indigo-600 mb-1">{satisfaction}%</div>
+                        <div className="text-xs sm:text-sm text-gray-600 font-medium">Satisfaction</div>
                      </div>
                   </div>
                </div>
@@ -134,7 +134,7 @@ export const Hero = () => {
                                  <img
                                     src={img.imgsrc}
                                     alt={img.alt}
-                                    className={`w-full h-80 lg:h-96 object-cover ${img.rounded} shadow-xl transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2`}
+                                    className={`w-full h-64 sm:h-80 lg:h-96 object-cover ${img.rounded} shadow-xl transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2`}
                                  />
                                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-inherit"></div>
                               </div>

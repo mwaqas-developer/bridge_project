@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { HiMoon, HiSun } from 'react-icons/hi'
 
 export const CaseStudies = () => {
@@ -33,80 +34,57 @@ export const CaseStudies = () => {
    ]
 
    return (
-      <section id="cases" className="py-20 w-full bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <section id="cases" className="py-8 sm:py-12 w-full bg-white">
          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header */}
-            <div className="text-center mb-16">
-               <div className="inline-flex items-center px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium mb-6">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                  Our Success Stories
-               </div>
-               <h3 className="text-5xl font-bold text-gray-900 mb-6">
-                  Case <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Studies</span>
-               </h3>
-               <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-                  Real results from our selected projects. Each case study represents our commitment to delivering exceptional value and measurable outcomes.
-               </p>
+            <div className="text-center mb-6 sm:mb-8">
+               <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">Case studies</h3>
+               <p className="mt-2 text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">A few highlights from recent work.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                {casestudies.map((casestudy, index) => (
-                  <div key={index} className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl overflow-hidden border border-gray-100 hover:border-indigo-200 transition-all duration-500 transform hover:-translate-y-2">
+                  <div key={index} className="group bg-white rounded-2xl shadow-sm hover:shadow-md overflow-hidden border border-gray-100 transition-shadow">
                      {/* Header with gradient background */}
                      <div className={`${casestudy.bg} h-48 flex items-center justify-center relative overflow-hidden`}>
                         <div className="absolute inset-0 bg-black/10"></div>
                         <div className="relative z-10 text-center">
-                           <div className="text-6xl mb-4">{casestudy.icon}</div>
-                           <h4 className="text-2xl font-bold text-white mb-2">{casestudy.projectname}</h4>
-                           <div className="inline-flex items-center px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+                           <div className="text-3xl sm:text-4xl mb-2">{casestudy.icon}</div>
+                           <h4 className="text-lg sm:text-xl font-semibold text-white mb-1">{casestudy.projectname}</h4>
+                           <div className="inline-flex items-center px-2 sm:px-2.5 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
                               {casestudy.category}
                            </div>
                         </div>
                         {/* Decorative elements */}
-                        <div className="absolute top-4 right-4 w-16 h-16 bg-white/10 rounded-full"></div>
-                        <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/10 rounded-full"></div>
+                        <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-full"></div>
+                        <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-8 h-8 sm:w-10 sm:h-10 bg-white/10 rounded-full"></div>
                      </div>
 
                      {/* Content */}
-                     <div className="p-8">
-                        <div className="flex items-center justify-between mb-4">
-                           <h5 className="text-xl font-bold text-gray-900">{casestudy.subname}</h5>
-                           <div className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">
-                              {casestudy.stats}
-                           </div>
+                     <div className="p-4 sm:p-6">
+                        <h5 className="text-base sm:text-lg font-semibold text-gray-900">{casestudy.subname}</h5>
+                        <div className="px-2 sm:px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-medium inline-block mb-3">
+                           {casestudy.stats}
                         </div>
-                        <p className="text-sm text-gray-600 leading-relaxed mb-6">{casestudy.description}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-4 sm:mb-5">{casestudy.description}</p>
 
                         {/* Action button */}
-                        <button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group">
-                           <span className="flex items-center justify-center">
-                              View Details
-                              <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                              </svg>
-                           </span>
-                        </button>
+                        <Link to="/services" className="w-full bg-gray-900 text-white font-medium py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg hover:bg-gray-800 transition-colors inline-flex items-center justify-center text-sm sm:text-base">View details</Link>
                      </div>
                   </div>
                ))}
             </div>
 
             {/* Call to Action */}
-            <div className="mt-16 text-center">
-               <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
-                  <h4 className="text-3xl font-bold text-gray-900 mb-4">Ready to Start Your Project?</h4>
-                  <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            <div className="mt-8 sm:mt-10 text-center">
+               <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-8 border border-gray-100">
+                  <h4 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900 mb-2">Ready to start your project?</h4>
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-500 mb-4 sm:mb-5 max-w-2xl mx-auto">
                      Let's discuss how we can help you achieve similar results for your business.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                     <button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                        Start Your Project
-                     </button>
-                     <button className="bg-white border-2 border-indigo-200 text-indigo-600 font-semibold py-4 px-8 rounded-xl hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-300">
-                        View All Projects
-                     </button>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                     <Link to="/contact" className="bg-indigo-600 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-indigo-700 transition-colors inline-flex items-center justify-center text-sm sm:text-base">Start your project</Link>
+                     <Link to="/services" className="bg-white border border-gray-300 text-gray-700 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center text-sm sm:text-base">View all projects</Link>
                   </div>
                </div>
             </div>

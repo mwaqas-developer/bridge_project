@@ -4,6 +4,30 @@
 
 body {
    font-family: 'Montserrat', system-ui, Avenir, Helvetica, Arial, sans-serif;
+   scroll-behavior: smooth;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Responsive typography improvements */
+@media (max-width: 640px) {
+   body {
+      font-size: 14px;
+      line-height: 1.5;
+   }
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 768px) {
+
+   button,
+   a,
+   input,
+   select,
+   textarea {
+      min-height: 44px;
+      min-width: 44px;
+   }
 }
 
 /* Custom Colors */
