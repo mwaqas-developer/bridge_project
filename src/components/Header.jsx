@@ -33,7 +33,7 @@ export const Header = () => {
    };
    const menuitems = [
       { name: 'About', href: '/about' },
-      { name: 'Service Categories', href: '/services', hasMegaMenu: true },
+      { name: 'Service Categories', href: '/services-categories', hasMegaMenu: true },
       { name: 'Case Studies', href: '/case-studies' },
       { name: 'Contact', href: '/contact' }
    ];

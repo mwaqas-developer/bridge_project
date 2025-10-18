@@ -196,7 +196,7 @@ const CategorySidebar = ({ categories, activeCategorySlug }) => {
 // --- Main Component ---
 
 const CategoryPage = () => {
-   const { categoryName } = useParams();
+   const { slug } = useParams();
    const [services, setServices] = useState([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
@@ -236,11 +236,11 @@ const CategoryPage = () => {
    }, [services]);
 
    const categoryServices = useMemo(() => {
-      if (!categoryName) return [];
-      return services.filter(s => s.category.slug === decodeURIComponent(categoryName));
-   }, [services, categoryName]);
+      if (!slug) return [];
+      return services.filter(s => s.category.slug === decodeURIComponent(slug));
+   }, [services, slug]);
 
-   const currentCategorySlug = categoryName ? decodeURIComponent(categoryName) : null;
+   const currentCategorySlug = slug ? decodeURIComponent(slug) : null;
 
    const currentCategoryObject = useMemo(() => {
       if (!currentCategorySlug || categories.length === 0) return null;
