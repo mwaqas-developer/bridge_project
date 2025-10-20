@@ -69,7 +69,7 @@ export const CaseStudies = () => {
                         <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-4 sm:mb-5">{casestudy.description}</p>
 
                         {/* Action button */}
-                        <Link to="/services" className="w-full bg-gray-900 text-white font-medium py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg hover:bg-gray-800 transition-colors inline-flex items-center justify-center text-sm sm:text-base">View details</Link>
+                        <Link to="/all-categories" className="w-full bg-gray-900 text-white font-medium py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg hover:bg-gray-800 transition-colors inline-flex items-center justify-center text-sm sm:text-base">View details</Link>
                      </div>
                   </div>
                ))}
@@ -84,7 +84,7 @@ export const CaseStudies = () => {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                      <Link to="/contact" className="bg-indigo-600 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-indigo-700 transition-colors inline-flex items-center justify-center text-sm sm:text-base">Start your project</Link>
-                     <Link to="/services" className="bg-white border border-gray-300 text-gray-700 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center text-sm sm:text-base">View all projects</Link>
+                     <Link to="/all-categories" className="bg-white border border-gray-300 text-gray-700 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center text-sm sm:text-base">View all projects</Link>
                   </div>
                </div>
             </div>

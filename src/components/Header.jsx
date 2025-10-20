@@ -33,7 +33,7 @@ export const Header = () => {
    };
    const menuitems = [
       { name: 'About', href: '/about' },
-      { name: 'Service Categories', href: '/services-categories', hasMegaMenu: true },
+      { name: 'Service Categories', href: '/all-categories', hasMegaMenu: true },
       { name: 'Case Studies', href: '/case-studies' },
       { name: 'Contact', href: '/contact' }
    ];
@@ -213,7 +213,7 @@ export const Header = () => {
                                           ) : (
                                              <div className="space-y-2">
                                                 <Link
-                                                   to="/services"
+                                                   to="/all-categories"
                                                    className="block py-2 text-sm font-semibold text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 px-3 rounded transition-colors duration-200"
                                                    onClick={toggleMobileMenu}
                                                 >

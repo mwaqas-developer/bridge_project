@@ -91,7 +91,7 @@ export const Hero = () => {
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                      <Link
-                        to="/services"
+                        to="/all-categories"
                         className="group relative px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-indigo-600 text-white rounded-lg font-semibold inline-flex items-center justify-center transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:-translate-y-1 text-sm sm:text-base"
                      >
                         <span>Our Services</span>

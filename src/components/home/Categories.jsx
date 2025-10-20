@@ -18,24 +18,11 @@ const CategoryCardSkeleton = () => (
    </div>
 );
 
-// Function to get appropriate image for each category
-const getCategoryImage = (categorySlug) => {
-   const imageMap = {
-      'development': 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
-      'design': 'https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80',
-      'marketing': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80',
-      'branding': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      'infrastructure': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80'
-   };
-
-   return imageMap[categorySlug] || 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
-};
-
 const CategoryCard = ({ category, serviceCount }) => (
    <div className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
       <div className="relative h-40 sm:h-48 overflow-hidden">
          <img
-            src={getCategoryImage(category.slug)}
+            src={category.image}
             alt={category.name}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
          />
@@ -45,9 +32,7 @@ const CategoryCard = ({ category, serviceCount }) => (
       </div>
       <div className="p-4 sm:p-6 flex-grow flex flex-col">
          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 min-h-[48px] sm:min-h-[56px]">{category.name}</h3>
-         <p className="text-gray-600 mb-4 sm:mb-6 flex-grow text-xs sm:text-sm leading-relaxed">
-            {category.description || `Explore our comprehensive ${category.name.toLowerCase()} services designed to meet your needs.`}
-         </p>
+         <p className="text-gray-600 mb-4 sm:mb-6 flex-grow text-xs sm:text-sm leading-relaxed">{category.description}</p>
          <div className="flex justify-between items-center mt-auto pt-3 sm:pt-4 border-t border-gray-100">
             <p className="text-sm text-gray-500">{serviceCount} available services</p>
             <Link
@@ -63,42 +48,31 @@ const CategoryCard = ({ category, serviceCount }) => (
 );
 
 export const Categories = () => {
-   const [services, setServices] = useState([]);
+   const [categories, setCategories] = useState([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
 
    useEffect(() => {
-      const fetchServices = async () => {
+      const fetchCategories = async () => {
          const API_URL = "https://my-json-server.typicode.com/mwaqas-developer/services-api/db";
          try {
             const res = await fetch(API_URL);
-            if (!res.ok) throw new Error("Failed to fetch services from the server.");
+            if (!res.ok) throw new Error("Failed to fetch categories from the server.");
             const data = await res.json();
-            setServices(data.services || []);
+            const formattedCategories = (data.categories || []).map(c => ({
+               ...c,
+               name: c.category,
+               serviceCount: c.services ? c.services.length : 0
+            }));
+            setCategories(formattedCategories);
          } catch (err) {
             setError(err.message);
          } finally {
             setLoading(false);
          }
       };
-      fetchServices();
+      fetchCategories();
    }, []);
-
-   const categories = useMemo(() => {
-      const categoryMap = new Map();
-      services.forEach(service => {
-         if (service.category && !categoryMap.has(service.category.slug)) {
-            categoryMap.set(service.category.slug, {
-               ...service.category,
-               serviceCount: 1
-            });
-         } else if (service.category && categoryMap.has(service.category.slug)) {
-            const existingCategory = categoryMap.get(service.category.slug);
-            existingCategory.serviceCount += 1;
-         }
-      });
-      return Array.from(categoryMap.values());
-   }, [services]);
 
    return (
       <section id="categories" className="py-8 sm:py-12 bg-white">
@@ -146,7 +120,7 @@ export const Categories = () => {
                   </p>
                   <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3 justify-center">
                      <Link
-                        to="/services"
+                        to="/all-categories"
                         className="bg-indigo-600 text-white font-medium py-3 px-4 sm:px-6 rounded-lg hover:bg-indigo-700 transition-colors inline-flex items-center justify-center text-sm sm:text-base"
                      >
                         View all categories

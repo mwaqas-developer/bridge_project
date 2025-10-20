@@ -5,7 +5,7 @@ const FEATURE_CARDS = [
    {
       title: 'All Service Categories',
       description: 'Browse all our service categories',
-      button: { text: 'View All Categories →', href: '/services' },
+      button: { text: 'View All Categories →', href: '/all-categories' },
       bg: 'bg-gradient-to-r from-indigo-50 to-blue-50'
    },
    {
@@ -22,68 +22,21 @@ const FEATURE_CARDS = [
    }
 ];
 
-// Category icon component
-const CategoryIcon = ({ slug }) => {
-   const base = "w-5 h-5";
-   switch (slug) {
-      case 'development':
-         return (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className={`${base}`}>
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 5h18M3 19h18M7 5v14m10-14v14" />
-            </svg>
-         );
-      case 'design':
-         return (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className={`${base}`}>
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M4 16l4-4 4 4 8-8" />
-            </svg>
-         );
-      case 'marketing':
-         return (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className={`${base}`}>
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 12h4l3 7 4-14 3 7h4" />
-            </svg>
-         );
-      case 'branding':
-         return (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className={`${base}`}>
-               <circle cx="12" cy="12" r="3.5" strokeWidth="1.8" />
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 2v3m0 14v3M2 12h3m14 0h3M4.93 4.93l2.12 2.12m9.9 9.9l2.12 2.12m0-14.14l-2.12 2.12m-9.9 9.9l-2.12 2.12" />
-            </svg>
-         );
-      case 'infrastructure':
-         return (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className={`${base}`}>
-               <rect x="3" y="4" width="18" height="6" rx="2" strokeWidth="1.8" />
-               <rect x="3" y="14" width="18" height="6" rx="2" strokeWidth="1.8" />
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M7 7h.01M11 7h.01M15 7h.01M7 17h.01M11 17h.01M15 17h.01" />
-            </svg>
-         );
-      default:
-         return (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className={`${base}`}>
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-         );
-   }
-};
-
-// Small presentational components for clarity
 const CategoryItem = ({ category, onClose }) => (
    <Link
-      to={`/category/${encodeURIComponent(category.slug)}`}
+      to={`/${encodeURIComponent(category.slug)}`}
       onClick={onClose}
       className="group block p-5 rounded-xl border border-gray-100 hover:border-indigo-200 hover:shadow-md transition-all duration-300 bg-white hover:bg-indigo-50/30"
    >
       <div className="flex items-start gap-4">
          <div className="flex-shrink-0">
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center group-hover:from-indigo-200 group-hover:to-indigo-300 transition-all duration-300">
-               <CategoryIcon slug={category.slug} />
+               <img src={category.icon} alt={`${category.category} icon`} className="w-6 h-6" />
             </div>
          </div>
          <div className="flex-grow min-w-0">
             <h3 className="font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors duration-200 mb-3 text-base">
-               {category.name}
+               {category.category}
             </h3>
             <div className="flex items-center justify-between">
                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 group-hover:bg-indigo-100 group-hover:text-indigo-700 transition-colors duration-200">
@@ -168,31 +121,18 @@ export const MegaMenu = ({ isOpen, onMouseEnter, onMouseLeave, onClose }) => {
    const [loading, setLoading] = useState(false);
 
    useEffect(() => {
-      const fetchServices = async () => {
+      const fetchCategories = async () => {
          if (isOpen && categories.length === 0) {
             setLoading(true);
             const API_URL = "https://my-json-server.typicode.com/mwaqas-developer/services-api/db";
             try {
                const res = await fetch(API_URL);
-               if (!res.ok) throw new Error("Failed to fetch services for mega menu.");
+               if (!res.ok) throw new Error("Failed to fetch categories for mega menu.");
                const data = await res.json();
-               const services = data.services || [];
-
-               const categoryMap = new Map();
-               services.forEach(service => {
-                  if (service.category && !categoryMap.has(service.category.slug)) {
-                     categoryMap.set(service.category.slug, {
-                        ...service.category,
-                        serviceCount: 1
-                     });
-                  } else if (service.category && categoryMap.has(service.category.slug)) {
-                     const existingCategory = categoryMap.get(service.category.slug);
-                     existingCategory.serviceCount += 1;
-                  }
-               });
-
-               const formattedCategories = Array.from(categoryMap.values());
-
+               const formattedCategories = (data.categories || []).map(c => ({
+                  ...c,
+                  serviceCount: c.services ? c.services.length : 0
+               }));
                setCategories(formattedCategories);
             } catch (error) {
                console.error(error.message);
@@ -202,7 +142,7 @@ export const MegaMenu = ({ isOpen, onMouseEnter, onMouseLeave, onClose }) => {
          }
       };
 
-      fetchServices();
+      fetchCategories();
    }, [isOpen, categories.length]);
 
    return (
@@ -245,3 +185,5 @@ export const MegaMenu = ({ isOpen, onMouseEnter, onMouseLeave, onClose }) => {
       </div>
    );
 };
+
+export default MegaMenu;

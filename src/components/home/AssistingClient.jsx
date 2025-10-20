@@ -153,7 +153,7 @@ export const AssistingClient = () => {
                         {/* Call to Action */}
                         <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
                            <div className="flex flex-col sm:flex-row gap-3">
-                              <Link to="/services" className="bg-indigo-600 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-indigo-700 transition-colors inline-flex items-center justify-center text-sm sm:text-base">Learn more</Link>
+                              <Link to="/all-categories" className="bg-indigo-600 text-white font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-indigo-700 transition-colors inline-flex items-center justify-center text-sm sm:text-base">Learn more</Link>
                               <Link to="/contact" className="bg-white border border-gray-300 text-gray-700 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center text-sm sm:text-base">Get started</Link>
                            </div>
                         </div>
