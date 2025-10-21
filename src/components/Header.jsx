@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+// Header component
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { LiaTimesSolid } from 'react-icons/lia';
 import { MegaMenu } from './MegaMenu';
+import { fetchMergedCategories } from "../utils/api";
 
 export const Header = () => {
    const [isHeaderSticky, setIsHeaderSticky] = useState(false);
@@ -45,29 +47,13 @@ export const Header = () => {
       const fetchServices = async () => {
          if (categoriesData.length === 0) {
             setLoadingCategories(true);
-            const API_URL = "https://my-json-server.typicode.com/mwaqas-developer/services-api/db";
             try {
-               const res = await fetch(API_URL);
-               if (!res.ok) throw new Error("Failed to fetch services for mobile menu.");
-               const data = await res.json();
-               const services = data.services || [];
-
-               const categoryMap = new Map();
-               services.forEach(service => {
-                  if (service.category && !categoryMap.has(service.category.slug)) {
-                     categoryMap.set(service.category.slug, {
-                        name: service.category.name,
-                        slug: service.category.slug,
-                        serviceCount: 1
-                     });
-                  } else if (service.category && categoryMap.has(service.category.slug)) {
-                     const existingCategory = categoryMap.get(service.category.slug);
-                     existingCategory.serviceCount += 1;
-                  }
-               });
-
-               const formattedCategories = Array.from(categoryMap.values());
-
+               const merged = await fetchMergedCategories();
+               const formattedCategories = (merged || []).map(c => ({
+                  name: c.category,
+                  slug: c.slug,
+                  serviceCount: c.services ? c.services.length : 0
+               }));
                setCategoriesData(formattedCategories);
             } catch (error) {
                console.error(error.message);

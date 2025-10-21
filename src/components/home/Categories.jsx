@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useMemo } from "react";
+// Categories component
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchMergedCategories } from "../../utils/api";
 
 const CategoryCardSkeleton = () => (
    <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
@@ -32,11 +34,10 @@ const CategoryCard = ({ category, serviceCount }) => (
       </div>
       <div className="p-4 sm:p-6 flex-grow flex flex-col">
          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 min-h-[48px] sm:min-h-[56px]">{category.name}</h3>
-         <p className="text-gray-600 mb-4 sm:mb-6 flex-grow text-xs sm:text-sm leading-relaxed">{category.description}</p>
          <div className="flex justify-between items-center mt-auto pt-3 sm:pt-4 border-t border-gray-100">
             <p className="text-sm text-gray-500">{serviceCount} available services</p>
             <Link
-               to={`/category/${encodeURIComponent(category.slug)}`}
+               to={`/${encodeURIComponent(category.slug)}`}
                className="font-semibold text-indigo-600 flex items-center gap-2 group-hover:text-indigo-800 transition-colors duration-300 text-sm sm:text-base"
             >
                View Category
@@ -54,19 +55,17 @@ export const Categories = () => {
 
    useEffect(() => {
       const fetchCategories = async () => {
-         const API_URL = "https://my-json-server.typicode.com/mwaqas-developer/services-api/db";
          try {
-            const res = await fetch(API_URL);
-            if (!res.ok) throw new Error("Failed to fetch categories from the server.");
-            const data = await res.json();
-            const formattedCategories = (data.categories || []).map(c => ({
+            const merged = await fetchMergedCategories();
+            const formattedCategories = (merged || []).map(c => ({
                ...c,
                name: c.category,
                serviceCount: c.services ? c.services.length : 0
             }));
             setCategories(formattedCategories);
+            setError(null);
          } catch (err) {
-            setError(err.message);
+            setError(err.message || "Failed to fetch categories.");
          } finally {
             setLoading(false);
          }

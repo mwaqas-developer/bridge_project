@@ -34,17 +34,26 @@ const ServiceCard = ({ service, categoryImage }) => (
 const CategorySidebar = ({ categories, activeCategorySlug }) => {
    const [query, setQuery] = useState("");
 
-   const totalCount = useMemo(() => {
-      return categories.reduce((sum, c) => sum + (c.serviceCount || 0), 0);
+   const normalizedCategories = useMemo(() => {
+      return categories.map((c) => {
+         const count = c.serviceCount ?? (Array.isArray(c.services) ? c.services.length : 0);
+         return { ...c, serviceCount: count };
+      });
    }, [categories]);
+
+   const totalCount = useMemo(() => {
+      return normalizedCategories.reduce((sum, c) => sum + (c.serviceCount || 0), 0);
+   }, [normalizedCategories]);
 
    const filtered = useMemo(() => {
       const q = query.trim().toLowerCase();
-      if (!q) return categories;
-      return categories.filter(c =>
-         c.category.toLowerCase().includes(q) || c.slug.toLowerCase().includes(q)
-      );
-   }, [categories, query]);
+      if (!q) return normalizedCategories;
+      return normalizedCategories.filter((c) => {
+         const name = (c.category || c.slug || "").toLowerCase();
+         const slug = (c.slug || "").toLowerCase();
+         return name.includes(q) || slug.includes(q);
+      });
+   }, [normalizedCategories, query]);
 
    return (
       <aside className="w-full md:w-1/4 lg:w-[28%]">

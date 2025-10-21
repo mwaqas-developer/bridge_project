@@ -1,6 +1,8 @@
+// AllCategories component
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SectionHeading from "../components/SectionHeading";
+import { fetchMergedCategories } from "../utils/api";
 
 const CategoryCard = ({ category }) => {
    const serviceCount = category.services ? category.services.length : 0;
@@ -49,14 +51,12 @@ const AllCategories = () => {
    useEffect(() => {
       const fetchData = async () => {
          setLoading(true);
-         const API_URL = "https://my-json-server.typicode.com/mwaqas-developer/services-api/db";
          try {
-            const res = await fetch(API_URL);
-            if (!res.ok) throw new Error("Failed to fetch data from the server.");
-            const fetchedData = await res.json();
-            setCategories(fetchedData.categories || []);
+            const merged = await fetchMergedCategories();
+            setCategories(merged || []);
+            setError(null);
          } catch (err) {
-            setError(err.message);
+            setError(err.message || "Failed to fetch merged categories.");
          } finally {
             setLoading(false);
          }

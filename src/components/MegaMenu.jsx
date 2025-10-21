@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+// MegaMenu component
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import { fetchMergedCategories } from "../utils/api";
 
 const FEATURE_CARDS = [
    {
@@ -124,12 +126,9 @@ export const MegaMenu = ({ isOpen, onMouseEnter, onMouseLeave, onClose }) => {
       const fetchCategories = async () => {
          if (isOpen && categories.length === 0) {
             setLoading(true);
-            const API_URL = "https://my-json-server.typicode.com/mwaqas-developer/services-api/db";
             try {
-               const res = await fetch(API_URL);
-               if (!res.ok) throw new Error("Failed to fetch categories for mega menu.");
-               const data = await res.json();
-               const formattedCategories = (data.categories || []).map(c => ({
+               const merged = await fetchMergedCategories();
+               const formattedCategories = (merged || []).map(c => ({
                   ...c,
                   serviceCount: c.services ? c.services.length : 0
                }));
